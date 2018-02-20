@@ -1,0 +1,59 @@
+## Basic Configuration
+
+baseurl = "https://lulichn.net/"
+builddrafts = false
+canonifyurls = true
+languageCode = "ja-JP"
+
+contentdir = "content"
+layoutdir = "layouts"
+publishdir = "public"
+
+# author = "Daisuke Higashi"
+title = "lulichn.net"
+
+theme = "hugo-goa"
+
+## Hugo Built-in Features
+# disqusShortname = "https-shenoybr-github-io-hugo-goa-demo" # Comment out to disable Disqus.
+# googleAnalytics = "XYZ"
+enableRobotsTXT = true
+
+## Site Settings
+[params]
+# author = ""
+intro = "lulichn.net"
+# description = ""
+# authorimage = "headshot.jpg"
+dateformat = "2006/01/02"
+
+## Site Meta Settings
+[params.meta]
+description = "about me"
+keywords = "Programming"
+
+## Social Accounts
+[params.social]
+github = "lulichn"
+# instagram = "<username>"
+# linkedin = "<username>"
+# twitter = "<username>"
+# stackoverflow = "<username>"
+
+## Extras
+[params.extra]
+copyright = "© 2018 Daisuke Higashi"
+poweredby = true
+highlightjs = true
+
+## Main Menu
+# [[menu.main]]
+#     name = "blog"
+#     identifier = "blog"
+#     weight = 100
+#     url = "http://lulichn.hatenablog.com"
+[[menu.main]]
+    name = "about"
+    identifier = "about"
+    weight = 200
+    url = "/about/"

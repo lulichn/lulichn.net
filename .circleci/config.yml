@@ -1,0 +1,61 @@
+version: 2
+jobs:
+  checkout-code:
+    docker:
+      - image: alpine/git
+    working_directory: ~/data
+    steps:
+      - checkout
+      - run:
+          name: Submodule update
+          command: git submodule update --init
+      - save_cache:
+          key: hugo-cache-{{ epoch }}
+          paths:
+            - ~/data
+  build-job:
+    docker:
+      - image: lulichn/hugo
+    working_directory: ~/data
+    steps:
+      - run:
+          name: Install ca-certificates
+          command: apk add --no-cache ca-certificates
+      - restore_cache:
+          key: hugo-cache
+      - run:
+          name: Build
+          command: hugo
+      - save_cache:
+          key: hugo-cache-public-{{ epoch }}
+          paths:
+            - ~/data
+  deploy-job:
+    docker:
+      - image: lulichn/firebase-tools
+    working_directory: ~/data
+    steps:
+      - run:
+          name: Install ca-certificates
+          command: apk add --no-cache ca-certificates
+      - restore_cache:
+          key: hugo-cache-public
+      - run:
+          name: Deploy
+          command: firebase deploy --project "$PROJECT_ID" --token "$FIREBASE_TOKEN"
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - checkout-code
+      - build-job:
+          requires:
+            - checkout-code
+      - deploy-job:
+          requires:
+            - checkout-code
+            - build-job
+          filters:
+            branches:
+              only: master
