@@ -8,6 +8,10 @@
     ],
     "rewrites": [
       {
+        "source": "/slide/**",
+        "destination": "https://lulichn-slides.firebaseapp.com/index.html"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }
