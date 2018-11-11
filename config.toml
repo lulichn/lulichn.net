@@ -57,3 +57,10 @@ highlightjs = true
     identifier = "about"
     weight = 200
     url = "/about/"
+
+[[menu.main]]
+    name = "slides"
+    identifier = "slides"
+    weight = 300
+    url = "https://slides.lulichn.net/"
+
